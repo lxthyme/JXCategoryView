@@ -1,1 +1,1 @@
-../../../../../Sources/Base/JXCategoryBaseCell.h
+../../../../../../JXCategoryView/Sources/Base/JXCategoryBaseCell.h

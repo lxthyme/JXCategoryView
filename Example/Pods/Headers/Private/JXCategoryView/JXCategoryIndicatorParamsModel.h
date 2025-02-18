@@ -1,1 +1,1 @@
-../../../../../Sources/Common/JXCategoryIndicatorParamsModel.h
+../../../../../../JXCategoryView/Sources/Common/JXCategoryIndicatorParamsModel.h

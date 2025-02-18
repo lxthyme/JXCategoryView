@@ -1,1 +1,1 @@
-../../../../../Sources/Common/JXCategoryIndicatorProtocol.h
+../../../../../../JXCategoryView/Sources/Common/JXCategoryIndicatorProtocol.h

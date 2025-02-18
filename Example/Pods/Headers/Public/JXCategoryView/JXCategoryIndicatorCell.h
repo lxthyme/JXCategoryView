@@ -1,1 +1,1 @@
-../../../../../Sources/Indicator/JXCategoryIndicatorCell.h
+../../../../../../JXCategoryView/Sources/Indicator/JXCategoryIndicatorCell.h

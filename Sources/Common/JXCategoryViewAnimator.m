@@ -16,14 +16,14 @@
 
 @implementation JXCategoryViewAnimator
 
-#pragma mark - Initialize
-
-- (void)dealloc {
+- (void)dealloc
+{
     self.progressCallback = nil;
     self.completeCallback = nil;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         _executing = NO;
@@ -32,8 +32,6 @@
     }
     return self;
 }
-
-#pragma mark - Public
 
 - (void)start {
     [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
@@ -52,8 +50,6 @@
     !self.completeCallback ?: self.completeCallback();
     self.executing = NO;
 }
-
-#pragma mark - Actions
 
 - (void)processDisplayLink:(CADisplayLink *)sender {
     if (self.firstTimestamp == 0) {

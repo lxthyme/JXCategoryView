@@ -1,1 +1,1 @@
-../../../../../Sources/Common/JXCategoryFactory.h
+../../../../../../JXCategoryView/Sources/Common/JXCategoryFactory.h

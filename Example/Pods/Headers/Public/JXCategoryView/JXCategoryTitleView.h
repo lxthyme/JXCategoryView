@@ -1,1 +1,1 @@
-../../../../../Sources/Title/JXCategoryTitleView.h
+../../../../../../JXCategoryView/Sources/Title/JXCategoryTitleView.h

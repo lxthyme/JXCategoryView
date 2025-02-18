@@ -1,1 +1,1 @@
-../../../../../Sources/VerticalZoomTitle/JXCategoryTitleVerticalZoomCell.h
+../../../../../../JXCategoryView/Sources/VerticalZoomTitle/JXCategoryTitleVerticalZoomCell.h

@@ -1,1 +1,1 @@
-../../../../../Sources/Indicator/IndicatorViews/JXCategoryIndicatorBallView.h
+../../../../../../JXCategoryView/Sources/Indicator/IndicatorViews/JXCategoryIndicatorBallView.h

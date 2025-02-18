@@ -13,8 +13,8 @@
 
 @implementation JXCategoryTitleImageView
 
-- (void)dealloc {
-    self.loadImageBlock = nil;
+- (void)dealloc
+{
     self.loadImageCallback = nil;
 }
 
@@ -32,47 +32,44 @@
 }
 
 - (void)refreshDataSource {
-    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:self.titles.count];
+    NSMutableArray *tempArray = [NSMutableArray array];
     for (int i = 0; i < self.titles.count; i++) {
         JXCategoryTitleImageCellModel *cellModel = [[JXCategoryTitleImageCellModel alloc] init];
         [tempArray addObject:cellModel];
     }
-    self.dataSource = [NSArray arrayWithArray:tempArray];
-    
-    if (!self.imageTypes || (self.imageTypes.count == 0)) {
-        NSMutableArray *types = [NSMutableArray arrayWithCapacity:self.titles.count];
-        for (int i = 0; i< self.titles.count; i++) {
+    if (self.imageTypes == nil || self.imageTypes.count == 0) {
+        NSMutableArray *types = [NSMutableArray array];
+        for (int i = 0; i < self.titles.count; i++) {
             [types addObject:@(JXCategoryTitleImageType_LeftImage)];
         }
-        self.imageTypes = [NSArray arrayWithArray:types];
+        self.imageTypes = types;
     }
+    self.dataSource = tempArray;
 }
 
 - (void)refreshCellModel:(JXCategoryBaseCellModel *)cellModel index:(NSInteger)index {
     [super refreshCellModel:cellModel index:index];
 
     JXCategoryTitleImageCellModel *myCellModel = (JXCategoryTitleImageCellModel *)cellModel;
-    myCellModel.loadImageBlock = self.loadImageBlock;
     myCellModel.loadImageCallback = self.loadImageCallback;
     myCellModel.imageType = [self.imageTypes[index] integerValue];
     myCellModel.imageSize = self.imageSize;
     myCellModel.titleImageSpacing = self.titleImageSpacing;
-    if (self.imageInfoArray && self.imageInfoArray.count != 0) {
-        myCellModel.imageInfo = self.imageInfoArray[index];
-    }else if (self.imageNames && self.imageNames.count != 0) {
+    if (self.imageNames != nil) {
         myCellModel.imageName = self.imageNames[index];
-    }else if (self.imageURLs && self.imageURLs.count != 0) {
+    }else if (self.imageURLs != nil) {
         myCellModel.imageURL = self.imageURLs[index];
     }
-    if (self.selectedImageInfoArray && self.selectedImageInfoArray.count != 0) {
-        myCellModel.selectedImageInfo = self.selectedImageInfoArray[index];
-    }else if (self.selectedImageNames && self.selectedImageNames.count != 0) {
+    if (self.selectedImageNames != nil) {
         myCellModel.selectedImageName = self.selectedImageNames[index];
-    }else if (self.selectedImageURLs && self.selectedImageURLs.count != 0) {
+    }else if (self.selectedImageURLs != nil) {
         myCellModel.selectedImageURL = self.selectedImageURLs[index];
     }
     myCellModel.imageZoomEnabled = self.imageZoomEnabled;
-    myCellModel.imageZoomScale = ((index == self.selectedIndex) ? self.imageZoomScale : 1.0);
+    myCellModel.imageZoomScale = 1.0;
+    if (index == self.selectedIndex) {
+        myCellModel.imageZoomScale = self.imageZoomScale;
+    }
 }
 
 - (void)refreshSelectedCellModel:(JXCategoryBaseCellModel *)selectedCellModel unselectedCellModel:(JXCategoryBaseCellModel *)unselectedCellModel {

@@ -1,1 +1,1 @@
-../../../../../Sources/Dot/JXCategoryDotView.h
+../../../../../../JXCategoryView/Sources/Dot/JXCategoryDotView.h

@@ -1,1 +1,1 @@
-../../../../../Sources/Dot/JXCategoryDotCellModel.h
+../../../../../../JXCategoryView/Sources/Dot/JXCategoryDotCellModel.h

@@ -1,1 +1,1 @@
-../../../../../Sources/Image/JXCategoryImageCell.h
+../../../../../../JXCategoryView/Sources/Image/JXCategoryImageCell.h

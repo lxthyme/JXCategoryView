@@ -10,7 +10,7 @@
 #import "JXCategoryDotCellModel.h"
 
 @interface JXCategoryDotCell ()
-@property (nonatomic, strong) UIView *dot;
+@property (nonatomic, strong) CALayer *dotLayer;
 @end
 
 @implementation JXCategoryDotCell
@@ -18,47 +18,54 @@
 - (void)initializeViews {
     [super initializeViews];
 
-    _dot = [[UIView alloc] init];
-    [self.contentView addSubview:self.dot];
-    self.dot.translatesAutoresizingMaskIntoConstraints = NO;
+    _dotLayer = [CALayer layer];
+    [self.contentView.layer addSublayer:self.dotLayer];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    JXCategoryDotCellModel *myCellModel = (JXCategoryDotCellModel *)self.cellModel;
+    self.dotLayer.bounds = CGRectMake(0, 0, myCellModel.dotSize.width, myCellModel.dotSize.height);
+    switch (myCellModel.relativePosition) {
+        case JXCategoryDotRelativePosition_TopLeft:
+        {
+            self.dotLayer.position = CGPointMake(CGRectGetMinX(self.titleLabel.frame) + myCellModel.dotOffset.x, CGRectGetMinY(self.titleLabel.frame) + myCellModel.dotOffset.y);
+        }
+            break;
+        case JXCategoryDotRelativePosition_TopRight:
+        {
+            self.dotLayer.position = CGPointMake(CGRectGetMaxX(self.titleLabel.frame) + myCellModel.dotOffset.x, CGRectGetMinY(self.titleLabel.frame) + myCellModel.dotOffset.y);
+        }
+            break;
+        case JXCategoryDotRelativePosition_BottomLeft:
+        {
+            self.dotLayer.position = CGPointMake(CGRectGetMinX(self.titleLabel.frame) + myCellModel.dotOffset.x, CGRectGetMaxY(self.titleLabel.frame) + myCellModel.dotOffset.y);
+        }
+            break;
+        case JXCategoryDotRelativePosition_BottomRight:
+        {
+            self.dotLayer.position = CGPointMake(CGRectGetMaxX(self.titleLabel.frame) + myCellModel.dotOffset.x, CGRectGetMaxY(self.titleLabel.frame) + myCellModel.dotOffset.y);
+        }
+            break;
+    }
+    [CATransaction commit];
 }
 
 - (void)reloadData:(JXCategoryBaseCellModel *)cellModel {
     [super reloadData:cellModel];
 
     JXCategoryDotCellModel *myCellModel = (JXCategoryDotCellModel *)cellModel;
-    self.dot.hidden = !myCellModel.dotHidden;
-    self.dot.backgroundColor = myCellModel.dotColor;
-    self.dot.layer.cornerRadius = myCellModel.dotCornerRadius;
-    [NSLayoutConstraint deactivateConstraints:self.dot.constraints];
-    [self.dot.widthAnchor constraintEqualToConstant:myCellModel.dotSize.width].active = YES;
-    [self.dot.heightAnchor constraintEqualToConstant:myCellModel.dotSize.height].active = YES;
-    switch (myCellModel.relativePosition) {
-        case JXCategoryDotRelativePosition_TopLeft:
-        {
-            [self.dot.centerXAnchor constraintEqualToAnchor:self.titleLabel.leadingAnchor constant:myCellModel.dotOffset.x].active = YES;
-            [self.dot.centerYAnchor constraintEqualToAnchor:self.titleLabel.topAnchor constant:myCellModel.dotOffset.y].active = YES;
-        }
-            break;
-        case JXCategoryDotRelativePosition_TopRight:
-        {
-            [self.dot.centerXAnchor constraintEqualToAnchor:self.titleLabel.trailingAnchor constant:myCellModel.dotOffset.x].active = YES;
-            [self.dot.centerYAnchor constraintEqualToAnchor:self.titleLabel.topAnchor constant:myCellModel.dotOffset.y].active = YES;
-        }
-            break;
-        case JXCategoryDotRelativePosition_BottomLeft:
-        {
-            [self.dot.centerXAnchor constraintEqualToAnchor:self.titleLabel.leadingAnchor constant:myCellModel.dotOffset.x].active = YES;
-            [self.dot.centerYAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:myCellModel.dotOffset.y].active = YES;
-        }
-            break;
-        case JXCategoryDotRelativePosition_BottomRight:
-        {
-            [self.dot.centerXAnchor constraintEqualToAnchor:self.titleLabel.trailingAnchor constant:myCellModel.dotOffset.x].active = YES;
-            [self.dot.centerYAnchor constraintEqualToAnchor:self.titleLabel.bottomAnchor constant:myCellModel.dotOffset.y].active = YES;
-        }
-            break;
-    }
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    self.dotLayer.hidden = !myCellModel.dotHidden;
+    self.dotLayer.backgroundColor = myCellModel.dotColor.CGColor;
+    self.dotLayer.cornerRadius = myCellModel.dotCornerRadius;
+    [CATransaction commit];
+
+    [self setNeedsLayout];
 }
 
 @end

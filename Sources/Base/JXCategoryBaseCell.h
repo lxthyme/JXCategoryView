@@ -25,5 +25,4 @@
 - (void)addSelectedAnimationBlock:(JXCategoryCellSelectedAnimationBlock)block;
 
 - (void)startSelectedAnimationIfNeeded:(JXCategoryBaseCellModel *)cellModel;
-
 @end

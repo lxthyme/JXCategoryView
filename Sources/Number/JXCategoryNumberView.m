@@ -10,7 +10,8 @@
 
 @implementation JXCategoryNumberView
 
-- (void)dealloc {
+- (void)dealloc
+{
     self.numberStringFormatterBlock = nil;
 }
 
@@ -23,7 +24,6 @@
     _numberLabelHeight = 14;
     _numberLabelWidthIncrement = 10;
     _numberLabelFont = [UIFont systemFontOfSize:11];
-    _shouldMakeRoundWhenSingleNumber = NO;
 }
 
 - (Class)preferredCellClass {
@@ -31,12 +31,12 @@
 }
 
 - (void)refreshDataSource {
-    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:self.titles.count];
+    NSMutableArray *tempArray = [NSMutableArray array];
     for (int i = 0; i < self.titles.count; i++) {
         JXCategoryNumberCellModel *cellModel = [[JXCategoryNumberCellModel alloc] init];
         [tempArray addObject:cellModel];
     }
-    self.dataSource = [NSArray arrayWithArray:tempArray];
+    self.dataSource = tempArray;
 }
 
 - (void)refreshCellModel:(JXCategoryBaseCellModel *)cellModel index:(NSInteger)index {
@@ -55,7 +55,6 @@
     myCellModel.numberLabelOffset = self.numberLabelOffset;
     myCellModel.numberLabelWidthIncrement = self.numberLabelWidthIncrement;
     myCellModel.numberLabelFont = self.numberLabelFont;
-    myCellModel.shouldMakeRoundWhenSingleNumber = self.shouldMakeRoundWhenSingleNumber;
 }
 
 @end

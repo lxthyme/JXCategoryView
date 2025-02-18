@@ -13,11 +13,12 @@
 
 @protocol JXCategoryIndicatorProtocol <NSObject>
 
-/**
- categoryView 重置状态时调用
 
- param selectedIndex 当前选中的 index
- param selectedCellFrame 当前选中的 cellFrame
+/**
+ categoryView重置状态时调用
+
+ param selectedIndex 当前选中的index
+ param selectedCellFrame 当前选中的cellFrame
  @param model 数据模型
  */
 - (void)jx_refreshState:(JXCategoryIndicatorParamsModel *)model;

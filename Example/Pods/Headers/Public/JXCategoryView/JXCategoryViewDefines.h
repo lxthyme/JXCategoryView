@@ -1,1 +1,1 @@
-../../../../../Sources/Common/JXCategoryViewDefines.h
+../../../../../../JXCategoryView/Sources/Common/JXCategoryViewDefines.h

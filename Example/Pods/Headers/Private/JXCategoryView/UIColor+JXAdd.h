@@ -1,1 +1,1 @@
-../../../../../Sources/Common/UIColor+JXAdd.h
+../../../../../../JXCategoryView/Sources/Common/UIColor+JXAdd.h

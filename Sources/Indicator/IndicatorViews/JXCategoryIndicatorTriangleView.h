@@ -8,7 +8,6 @@
 
 #import "JXCategoryIndicatorComponentView.h"
 
-/// 三角形样式的指示器
 @interface JXCategoryIndicatorTriangleView : JXCategoryIndicatorComponentView
 
 @end

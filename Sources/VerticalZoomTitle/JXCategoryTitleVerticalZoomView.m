@@ -45,10 +45,7 @@
     self.cellWidthZoomScale = currentScale;
     self.cellSpacing = [JXCategoryFactory interpolationFrom:self.minVerticalCellSpacing to:self.maxVerticalCellSpacing percent:percent];
     if (shouldReloadData) {
-        [self refreshDataSource];
-        [self refreshState];
-        [self.collectionView.collectionViewLayout invalidateLayout];
-        [self.collectionView reloadData];
+        [self reloadData];
     }
 }
 

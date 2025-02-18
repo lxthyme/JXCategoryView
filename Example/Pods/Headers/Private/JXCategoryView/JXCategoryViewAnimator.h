@@ -1,1 +1,1 @@
-../../../../../Sources/Common/JXCategoryViewAnimator.h
+../../../../../../JXCategoryView/Sources/Common/JXCategoryViewAnimator.h

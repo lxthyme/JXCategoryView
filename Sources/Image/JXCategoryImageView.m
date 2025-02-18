@@ -11,8 +11,8 @@
 
 @implementation JXCategoryImageView
 
-- (void)dealloc {
-    self.loadImageBlock = nil;
+- (void)dealloc
+{
     self.loadImageCallback = nil;
 }
 
@@ -30,20 +30,13 @@
 }
 
 - (void)refreshDataSource {
-    NSUInteger count = 0;
-    if (self.imageInfoArray.count > 0) {
-        count = self.imageInfoArray.count;
-    }else if (self.imageNames.count > 0) {
-        count = self.imageNames.count;
-    }else {
-        count = self.imageURLs.count;
-    }
-    NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:count];
+    NSMutableArray *tempArray = [NSMutableArray array];
+    NSUInteger count = (self.imageNames.count > 0) ? self.imageNames.count : (self.imageURLs.count > 0 ? self.imageURLs.count : 0);
     for (int i = 0; i < count; i++) {
         JXCategoryImageCellModel *cellModel = [[JXCategoryImageCellModel alloc] init];
         [tempArray addObject:cellModel];
     }
-    self.dataSource = [NSArray arrayWithArray:tempArray];
+    self.dataSource = tempArray;
 }
 
 - (void)refreshSelectedCellModel:(JXCategoryBaseCellModel *)selectedCellModel unselectedCellModel:(JXCategoryBaseCellModel *)unselectedCellModel {
@@ -60,26 +53,24 @@
     [super refreshCellModel:cellModel index:index];
 
     JXCategoryImageCellModel *myCellModel = (JXCategoryImageCellModel *)cellModel;
-    myCellModel.loadImageBlock = self.loadImageBlock;
     myCellModel.loadImageCallback = self.loadImageCallback;
     myCellModel.imageSize = self.imageSize;
     myCellModel.imageCornerRadius = self.imageCornerRadius;
-    if (self.imageInfoArray && self.imageInfoArray.count != 0) {
-        myCellModel.imageInfo = self.imageInfoArray[index];
-    }else if (self.imageNames && self.imageNames.count != 0) {
+    if (self.imageNames != nil) {
         myCellModel.imageName = self.imageNames[index];
-    }else if (self.imageURLs && self.imageURLs.count != 0) {
+    }else if (self.imageURLs != nil) {
         myCellModel.imageURL = self.imageURLs[index];
     }
-    if (self.selectedImageInfoArray && self.selectedImageInfoArray.count != 0) {
-        myCellModel.selectedImageInfo = self.selectedImageInfoArray[index];
-    }else if (self.selectedImageNames && self.selectedImageNames.count != 0) {
+    if (self.selectedImageNames != nil) {
         myCellModel.selectedImageName = self.selectedImageNames[index];
-    }else if (self.selectedImageURLs && self.selectedImageURLs.count != 0) {
+    }else if (self.selectedImageURLs != nil) {
         myCellModel.selectedImageURL = self.selectedImageURLs[index];
     }
     myCellModel.imageZoomEnabled = self.imageZoomEnabled;
-    myCellModel.imageZoomScale = ((index == self.selectedIndex) ? self.imageZoomScale : 1.0);
+    myCellModel.imageZoomScale = 1.0;
+    if (index == self.selectedIndex) {
+        myCellModel.imageZoomScale = self.imageZoomScale;
+    }
 }
 
 - (void)refreshLeftCellModel:(JXCategoryBaseCellModel *)leftCellModel rightCellModel:(JXCategoryBaseCellModel *)rightCellModel ratio:(CGFloat)ratio {
